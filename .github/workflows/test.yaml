@@ -6,6 +6,9 @@ on:
     branches:
       - main # Adjust to the branch where you want this to trigger
 
+permissions:
+  contents: write
+
 jobs:
   commit_changes:
     runs-on: ubuntu-latest
