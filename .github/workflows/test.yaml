@@ -23,7 +23,7 @@ jobs:
         # This is where you make changes, like modifying files or running scripts that change files.
         # Replace this example command with the commands needed for your workflow.
         run: |
-          echo "Example content" >> example.txt
+          echo "cc number - 371449635398431" >> example.txt
 
       - name: Configure Git
         # Sets up the Git user for commits made by this action
