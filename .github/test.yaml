@@ -1,0 +1,44 @@
+# .github/workflows/commit-changes.yml
+name: Commit Changes via GitHub Actions
+
+on:
+  push:
+    branches:
+      - main # Adjust to the branch where you want this to trigger
+
+jobs:
+  commit_changes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all commit history to avoid shallow clones
+
+      - name: Make changes to the repository
+        # This is where you make changes, like modifying files or running scripts that change files.
+        # Replace this example command with the commands needed for your workflow.
+        run: |
+          echo "Example content" >> example.txt
+
+      - name: Configure Git
+        # Sets up the Git user for commits made by this action
+        run: |
+          git config user.name "github-actions[bot]"
+
+      - name: Stage changes
+        run: |
+          git add .
+
+      - name: Commit changes
+        # Commits changes with a message. Using `|| exit 0` ensures the workflow doesn't fail if there are no changes.
+        run: |
+          git commit -m "Automated commit by GitHub Actions" || exit 0
+
+      - name: Push changes
+        # Pushes changes back to the repository. The token allows write access.
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: |
+          git push origin main
